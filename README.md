@@ -1,6 +1,6 @@
-# Spotlight Wallpaper
+# [Spotlight Wallpaper](https://spotlightwallpaper.onlineth.com)
 
-*All trademarks and registered trademarks are the property of their respective owners. You agree to the [license](LICENSE) when you use this software. I am not liable for how you use this software.*
+*All trademarks & images are the property of their respective owners. You agree to the [license](LICENSE) when you use this software. I am not liable for how you use this software.*
 
 This is a simple app that will take the current Spotlight Lock Screen image and set it as your desktop wallpaper.
 
