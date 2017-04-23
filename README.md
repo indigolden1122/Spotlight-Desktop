@@ -1,4 +1,4 @@
-# [Spotlight Wallpaper](https://spotlightwallpaper.onlineth.com)
+# [Spotlight Wallpaper](https://wallpaper.onlineth.com)
 
 *All trademarks & images are the property of their respective owners. You agree to the [license](LICENSE) when you use this software. I am not liable for how you use this software.*
 
