@@ -44,9 +44,9 @@ def SpotlightDesktop():
 SpotlightDesktop()
 
 # Schedule SpotlightDesktop to run every day
-schedule.every().day.do(SpotlightDesktop)
+schedule.every().hour.do(SpotlightDesktop)
 
 # Let it run in the background
 while True:
     schedule.run_pending()
-    time.sleep(3600)
+    time.sleep(60)
