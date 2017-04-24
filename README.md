@@ -1,5 +1,7 @@
 # [Spotlight Wallpaper](https://wallpaper.onlineth.com)
 
+[![Code Climate](https://codeclimate.com/github/onlineth/SpotlightWallpaper/badges/gpa.svg)](https://codeclimate.com/github/onlineth/SpotlightWallpaper)
+
 *All trademarks & images are the property of their respective owners. You agree to the [license](LICENSE) when you use this software. I am not liable for how you use this software.*
 
 [Download Now](https://github.com/onlineth/SpotlightWallpaper/releases)
