@@ -1,10 +1,10 @@
-# [Spotlight Wallpaper](https://wallpaper.onlineth.com)
+# [Spotlight Desktop](https://wallpaper.onlineth.com)
 
-[![Code Climate](https://codeclimate.com/github/onlineth/SpotlightWallpaper/badges/gpa.svg)](https://codeclimate.com/github/onlineth/SpotlightWallpaper)
+[![Code Climate](https://codeclimate.com/github/onlineth/Spotlight-Desktop/badges/gpa.svg)](https://codeclimate.com/github/onlineth/Spotlight-Desktop)
 
 *All trademarks & images are the property of their respective owners. You agree to the [license](LICENSE) when you use this software. I am not liable for how you use this software.*
 
-[Download Now](https://github.com/onlineth/SpotlightWallpaper/releases)
+[Download Now](https://github.com/onlineth/Spotlight-Desktop/releases)
 
 This is a simple app that will take the current Spotlight Lock Screen image and set it as your desktop wallpaper.
 
