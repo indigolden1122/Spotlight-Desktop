@@ -8,11 +8,11 @@ import sys
 base = 'Win32GUI' if sys.platform=='win32' else None
 
 executables = [
-    Executable('SpotlightWallpaper.py', base=base, icon="icon.ico")
+    Executable('SpotlightDesktop.py', base=base, icon="icon.ico")
 ]
 
-setup(name='SpotlightWallpaper',
+setup(name='SpotlightDesktop',
       version = '1.0',
-      description = 'SpotlightWallpaper',
+      description = 'SpotlightDesktop',
       options = dict(build_exe = buildOptions),
       executables = executables)
