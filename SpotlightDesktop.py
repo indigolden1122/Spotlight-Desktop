@@ -3,7 +3,7 @@ import ctypes
 import sys
 import time
 
-# Simple message box function 
+# Simple message box function
 def Mbox(title, text, style):
     ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
