@@ -14,7 +14,6 @@ def getCurrentSpotlightImage():
                               "SOFTWARE\Microsoft\Windows\CurrentVersion\Lock Screen\Creative")
         asset_path = winreg.QueryValueEx(hKey, "LandscapeAssetPath")
     except:
-        schedule.CancelJob()
         Mbox("SpotlightDesktop | ERROR", 'Cannot find the registry information of the Spotlight image location.', 0)
         sys.exit()
 
@@ -28,7 +27,6 @@ def ChangeWallpaper(image_location):
         ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image_location, 3)
         print('Desktop wallpaper changed')
     except:
-        schedule.CancelJob()
         Mbox("SpotlightDesktop | ERROR", 'Cannot change the desktop wallpaper tot he Spotlight image', 0)
         sys.exit()
 
