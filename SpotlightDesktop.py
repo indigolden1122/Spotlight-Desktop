@@ -51,6 +51,6 @@ def checkforchange(location):
 IMAGE_LOCATION = spotlightdesktop()
 
 # Let it run in the background
-while True:
+while '-s' not in sys.argv:
     checkforchange(IMAGE_LOCATION)
     time.sleep(60)
