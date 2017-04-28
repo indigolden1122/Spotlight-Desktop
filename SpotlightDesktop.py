@@ -1,53 +1,56 @@
-import winreg
+"""The SpotlightDesktop Script"""
 import ctypes
 import sys
 import time
+import winreg
 
-# Simple message box function
-def Mbox(title, text, style):
+def mbox(title, text, style):
+    """Simple message box function"""
     ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-# Gets the current Spotlight image path
-def getCurrentSpotlightImage():
+def getcurrentdpotlightimage():
+    """Gets the current Spotlight image path"""
     try:
-        hKey = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
-                              "SOFTWARE\Microsoft\Windows\CurrentVersion\Lock Screen\Creative")
-        asset_path = winreg.QueryValueEx(hKey, "LandscapeAssetPath")
-    except:
-        Mbox("SpotlightDesktop | ERROR", 'Cannot find the registry information of the Spotlight image location.', 0)
+        hkey = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
+                              "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lock Screen\\Creative")
+        asset_path = winreg.QueryValueEx(hkey, "LandscapeAssetPath")
+    except FileNotFoundError:
+        mbox("spotlightdesktop | ERROR", 'Cannot find the registry information'+
+             'of the Spotlight image location.', 0)
         sys.exit()
 
     # Return only the value from the resulting tuple (value, type_as_int).
     return asset_path[0]
 
-# Changes the Windows Wallpaper
-def ChangeWallpaper(image_location):
+def changewallpaper(location):
+    """Changes the Windows Wallpaper"""
     try:
-        SPI_SETDESKWALLPAPER = 20
-        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image_location, 3)
+        spi_setdeskwallpaper = 20
+        ctypes.windll.user32.SystemParametersInfoW(spi_setdeskwallpaper, 0, location, 3)
         print('Desktop wallpaper changed')
-    except:
-        Mbox("SpotlightDesktop | ERROR", 'Cannot change the desktop wallpaper tot he Spotlight image', 0)
+    except FileNotFoundError:
+        mbox("spotlightdesktop | ERROR", 'Cannot change the desktop wallpaper to'+
+             'the Spotlight image.', 0)
         sys.exit()
 
-# The function that ties everything together
-def SpotlightDesktop():
-    SpotlightImage = getCurrentSpotlightImage()
-    print('Spotlight image location found: '+SpotlightImage)
-    ChangeWallpaper(SpotlightImage)
+def spotlightdesktop():
+    """The function that ties everything together"""
+    spotlightimage = getcurrentdpotlightimage()
+    print('Spotlight image location found: '+spotlightimage)
+    changewallpaper(spotlightimage)
     print('Finished updating the current Spotlight image')
-    return SpotlightImage
+    return spotlightimage
 
-# Function that checks if the Spotlight image changes
-def CheckForChange(image_location):
-    if (image_location != getCurrentSpotlightImage()):
+def checkforchange(location):
+    """Function that checks if the Spotlight image changes"""
+    if location != getcurrentdpotlightimage():
         print('Spotlight image changed, changing background')
-        SpotlightDesktop()
+        spotlightdesktop()
 
 # Run it once now
-image_location = SpotlightDesktop()
+IMAGE_LOCATION = spotlightdesktop()
 
 # Let it run in the background
 while True:
-    CheckForChange(image_location)
+    checkforchange(IMAGE_LOCATION)
     time.sleep(60)
