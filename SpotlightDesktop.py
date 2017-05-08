@@ -4,9 +4,11 @@ import sys
 import time
 import winreg
 
+
 def mbox(title, text, style):
     """Simple message box function"""
     ctypes.windll.user32.MessageBoxW(0, text, title, style)
+
 
 def getcurrentdpotlightimage():
     """Gets the current Spotlight image path"""
@@ -15,12 +17,13 @@ def getcurrentdpotlightimage():
                               "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lock Screen\\Creative")
         asset_path = winreg.QueryValueEx(hkey, "LandscapeAssetPath")
     except FileNotFoundError:
-        mbox("spotlightdesktop | ERROR", 'Cannot find the registry information'+
+        mbox("spotlightdesktop | ERROR", 'Cannot find the registry information' +
              'of the Spotlight image location.', 0)
         sys.exit()
 
     # Return only the value from the resulting tuple (value, type_as_int).
     return asset_path[0]
+
 
 def changewallpaper(location):
     """Changes the Windows Wallpaper"""
@@ -29,9 +32,10 @@ def changewallpaper(location):
         ctypes.windll.user32.SystemParametersInfoW(spi_setdeskwallpaper, 0, location, 3)
         print('Desktop wallpaper changed')
     except FileNotFoundError:
-        mbox("spotlightdesktop | ERROR", 'Cannot change the desktop wallpaper to'+
+        mbox("spotlightdesktop | ERROR", 'Cannot change the desktop wallpaper to' +
              'the Spotlight image.', 0)
         sys.exit()
+
 
 def spotlightdesktop():
     """The function that ties everything together"""
@@ -40,6 +44,7 @@ def spotlightdesktop():
     changewallpaper(spotlightimage)
     print('Finished updating the current Spotlight image')
     return spotlightimage
+
 
 def checkforchange(location):
     """Function that checks if the Spotlight image changes"""
