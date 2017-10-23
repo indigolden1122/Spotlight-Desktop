@@ -3,6 +3,7 @@ import ctypes
 import sys
 import time
 import winreg
+import subprocess
 
 
 def mbox(title, text, style):
@@ -12,17 +13,39 @@ def mbox(title, text, style):
 
 def getcurrentdpotlightimage():
     """Gets the current Spotlight image path"""
+
+    # Why run a command? Try getting that through the winreg library... (permissions issues)
     try:
-        hkey = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
-                              "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lock Screen\\Creative")
-        asset_path = winreg.QueryValueEx(hkey, "LandscapeAssetPath")
-    except FileNotFoundError:
-        mbox("spotlightdesktop | ERROR", 'Cannot find the registry information' +
+        output = subprocess.check_output("reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Creative", shell=True).decode('utf8').splitlines()
+    except subprocess.CalledProcessError:
+        location = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lock Screen\\Creative"
+
+        try:
+            hkey = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
+                                  location)
+            asset_path = winreg.QueryValueEx(hkey, "LandscapeAssetPath")
+        except FileNotFoundError:
+            mbox("spotlightdesktop | ERROR", 'Cannot find the registry information' +
+                 'of the Spotlight image location.', 0)
+            sys.exit()
+
+        # Return only the value from the resulting tuple (value, type_as_int).
+        return asset_path[0]
+
+    for x in output:
+        if(x != ""):
+            location = x
+
+    # And yes, even when we find the location, that's protected too
+    try:
+        output = subprocess.check_output("reg query " + location + " /v LandscapeAssetPath", shell=True).decode('utf8')
+    except subprocess.CalledProcessError:
+        mbox("spotlightdesktop | ERROR", 'Cannot find the registry information based on the new path' +
              'of the Spotlight image location.', 0)
         sys.exit()
 
-    # Return only the value from the resulting tuple (value, type_as_int).
-    return asset_path[0]
+    location = output[output.rindex(' ')+1:] 
+    return location
 
 
 def changewallpaper(location):
