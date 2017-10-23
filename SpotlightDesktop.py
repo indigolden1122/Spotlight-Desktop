@@ -16,7 +16,7 @@ def getcurrentdpotlightimage():
 
     # Why run a command? Try getting that through the winreg library... (permissions issues)
     try:
-        output = subprocess.check_output("reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Creative", shell=True).decode('utf8').splitlines()
+        output = subprocess.check_output("reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Creative", shell=True, stderr=subprocess.STDOUT).decode('utf8').splitlines()
     except subprocess.CalledProcessError:
         location = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lock Screen\\Creative"
 
@@ -38,7 +38,7 @@ def getcurrentdpotlightimage():
 
     # And yes, even when we find the location, that's protected too
     try:
-        output = subprocess.check_output("reg query " + location + " /v LandscapeAssetPath", shell=True).decode('utf8')
+        output = subprocess.check_output("reg query " + location + " /v LandscapeAssetPath", shell=True, stderr=subprocess.STDOUT).decode('utf8')
     except subprocess.CalledProcessError:
         mbox("spotlightdesktop | ERROR", 'Cannot find the registry information based on the new path' +
              'of the Spotlight image location.', 0)
