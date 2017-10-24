@@ -95,13 +95,10 @@ def getcurrentdpotlightimage():
 def changewallpaper(location):
     """Changes the Windows Wallpaper"""
     location = ''.join(location.splitlines())
-    
+
     SPIF_UPDATEINIFILE  = 0x01
     SPIF_SENDCHANGE     = 0x02
     SPI_SETDESKWALLPAPER    = 0x0014
-    WM_SETTINGCHANGE    = 0x1A
-    HWND_BROADCAST      = 0xFFFF
-    SPI_GETDESKWALLPAPER    = 0x0073
 
     try:
         ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 1, location, SPIF_UPDATEINIFILE | SPIF_SENDCHANGE)
