@@ -16,39 +16,58 @@ def getcurrentdpotlightimage():
     """Gets the current Spotlight image path"""
 
     # Why run a command? Try getting that through the winreg library... (permissions issues)
-    while(1): 
-        try:
-            location = subprocess.check_output("RegLookup.exe HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Creative", shell=True, stderr=subprocess.STDOUT).decode('utf8').splitlines()[-1]
+    try:
+        locations = subprocess.check_output("RegLookup.exe HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Creative", shell=True, stderr=subprocess.STDOUT).decode('utf8').splitlines()
+        for current_location in locations:
 
-            # Sadely, not the real location
+            # Gives a lot of output, just take the actual results
+            if not (current_location.startswith("HKEY_LOCAL_MACHINE")):
+                continue
+
             try:
-                location = subprocess.check_output("RegLookup.exe "+location, shell=True, stderr=subprocess.STDOUT).decode('utf8').splitlines()[-1]
+                output = subprocess.check_output("RegLookup.exe " + current_location + " /v LandscapeAssetPath", shell=True, stderr=subprocess.STDOUT).decode('utf8')
+                AssetPath = output[output.rindex(' ')+1:]
 
-                # And yes, even when we find the location, that's protected too
-                try:
-                    
-                    output = subprocess.check_output("RegLookup.exe " + location + " /v landscapeImage", shell=True, stderr=subprocess.STDOUT).decode('utf8')
-                except subprocess.CalledProcessError:
-                    print("Breaked from Level 3")
-                    break
-
-                # Get whatever is after the last space (that should be the image path)
-                location = output[output.rindex(' ')+1:]
-
-                if (location == ""):
-                    mbox("spotlightdesktop | ERROR", 'Found the registry information' +
-                         'but it did not include a path to the Spotlight image location.', 0)
-                    sys.exit()
-
-                return location
+                if  os.getenv('LOCALAPPDATA') not in AssetPath:
+                    continue
 
             except subprocess.CalledProcessError:
-                print("Breaked from Level 2")
-                break
+                continue
 
-        except subprocess.CalledProcessError:
-            print("Breaked from Level 1")
-            break
+            # Check to make sure there is content
+            if (AssetPath == ""):
+                mbox("spotlightdesktop | ERROR", 'Found the registry information' +
+                     'but it did not include a path to the Spotlight image location.', 0)
+                sys.exit()
+
+            # We have an AssetPath but newer versions of Windows will go into subnodes, see if any exist
+            try:
+                locations_sub = subprocess.check_output("RegLookup.exe "+current_location, shell=True, stderr=subprocess.STDOUT).decode('utf8').splitlines()[-1]
+
+                # Could be the same thing
+                if (locations_sub != current_location):
+
+                    # Got a subnode, one of them is the actual location
+                    try:
+                        output = subprocess.check_output("RegLookup.exe " + locations_sub + " /v landscapeImage", shell=True, stderr=subprocess.STDOUT).decode('utf8')
+                        AssetPath_Real = output[output.rindex(' ')+1:]
+
+                        if  os.getenv('LOCALAPPDATA') in AssetPath_Real:
+                            print("Level 2")
+                            return AssetPath_Real
+
+                    except subprocess.CalledProcessError:
+                        pass
+
+            except subprocess.CalledProcessError:
+                pass
+
+            print("Level 1")
+            return AssetPath;
+
+
+    except subprocess.CalledProcessError:
+        pass
 
     print("Using old registry location")
 
@@ -75,6 +94,8 @@ def getcurrentdpotlightimage():
 
 def changewallpaper(location):
     """Changes the Windows Wallpaper"""
+    location = ''.join(location.splitlines())
+    
     SPIF_UPDATEINIFILE  = 0x01
     SPIF_SENDCHANGE     = 0x02
     SPI_SETDESKWALLPAPER    = 0x0014
