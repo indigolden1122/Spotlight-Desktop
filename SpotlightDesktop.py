@@ -53,7 +53,7 @@ def getcurrentdpotlightimage():
                         AssetPath_Real = output[output.rindex(' ')+1:]
 
                         if  os.getenv('LOCALAPPDATA') in AssetPath_Real:
-                            print("Level 2")
+                            # Exit from Level 2
                             return AssetPath_Real
 
                     except subprocess.CalledProcessError:
@@ -62,14 +62,14 @@ def getcurrentdpotlightimage():
             except subprocess.CalledProcessError:
                 pass
 
-            print("Level 1")
+            # Exit from Level 1
             return AssetPath;
 
 
     except subprocess.CalledProcessError:
         pass
 
-    print("Using old registry location")
+    # Using old registry location
 
     location = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lock Screen\\Creative"
 
