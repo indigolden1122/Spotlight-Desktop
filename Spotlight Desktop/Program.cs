@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 
 namespace Spotlight_Desktop
 {
-    class Program
+    internal class Program
     {
+
+
+        // Show output only if in a command prompt
         [DllImport("kernel32.dll")]
         private static extern void AttachConsole(int dwProcessId);
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             AttachConsole(-1);
-            Console.WriteLine("Hello World");
+
+            Console.WriteLine("The current Spotlight Lock Screen image is located at:\n"+ FindImage.FindCurrentImage());
         }
     }
 }
