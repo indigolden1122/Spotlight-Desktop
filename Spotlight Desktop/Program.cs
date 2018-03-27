@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace Spotlight_Desktop
 {
@@ -10,6 +12,7 @@ namespace Spotlight_Desktop
     {
         static void Main(string[] args)
         {
+            Debug.WriteLine("Hello World");
         }
     }
 }
