@@ -23,7 +23,7 @@ namespace Spotlight_Desktop
         public List<SubKey> SubKeys = new List<SubKey>();
 
 
-        // keyPath (path to key), dive (recursevly go through SubKeys)
+        // keyPath (path to key), dive (recursively go through SubKeys)
         public RegLookupParse(string keyPath, bool dive = true)
         {
             RegistryKey localKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);

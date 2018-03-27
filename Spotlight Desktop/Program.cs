@@ -6,8 +6,6 @@ namespace Spotlight_Desktop
 {
     internal class Program
     {
-
-
         // Show output only if in a command prompt
         [DllImport("kernel32.dll")]
         private static extern void AttachConsole(int dwProcessId);
