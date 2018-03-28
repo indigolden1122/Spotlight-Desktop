@@ -10,11 +10,20 @@ namespace Spotlight_Desktop
     {
         private static string _currSpotlightPath;
 
+        const int SetWallpaper = 20;
+        const int UpdateIniFile = 0x01;
+        const int SendWinIniChange = 0x02;
+
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+
 
         private static void ChangeWallpaper(string pathToImage)
         {
-            // This should do that^
+            SystemParametersInfo(SetWallpaper, 0, pathToImage, UpdateIniFile | SendWinIniChange);
         }
+
 
         private static void UpdateDesktop()
         {
@@ -23,17 +32,17 @@ namespace Spotlight_Desktop
             ChangeWallpaper(_currSpotlightPath);
         }
 
+
         // Show output only if in a command prompt
         [DllImport("kernel32.dll")]
         private static extern void AttachConsole(int dwProcessId);
+
 
         private static void Main(string[] args)
         {
             AttachConsole(-1);
 
             if (File.Exists("update.exe")) System.Diagnostics.Process.Start("update.exe");
-
-            _currSpotlightPath = FindImage.FindCurrentImage();
 
             int count = 0;
             while (true)
