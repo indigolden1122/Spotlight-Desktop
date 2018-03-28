@@ -18,7 +18,7 @@ namespace Spotlight_Desktop
         }
 
 
-        public bool Error = false;
+        public bool Error;
         public List<KeyValue> KeyValues = new List<KeyValue>();
         public List<SubKey> SubKeys = new List<SubKey>();
 
