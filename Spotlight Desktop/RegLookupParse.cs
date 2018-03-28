@@ -44,7 +44,7 @@ namespace Spotlight_Desktop
                 // Check if it's needed to go through the subkeys
                 if (dive)
                 {
-                    SubKeys.Add(new SubKey()
+                    SubKeys.Add(new SubKey
                     {
                         KeyPath = subKeyPath,
                         SubKeyObj = new RegLookupParse(subKeyPath)
@@ -52,7 +52,7 @@ namespace Spotlight_Desktop
                 }
                 else
                 {
-                    SubKeys.Add(new SubKey()
+                    SubKeys.Add(new SubKey
                     {
                         KeyPath = subKeyPath
                     });
