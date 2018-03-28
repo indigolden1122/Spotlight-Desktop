@@ -42,16 +42,22 @@ namespace Spotlight_Desktop
         {
             AttachConsole(-1);
 
-            if (File.Exists("update.exe")) System.Diagnostics.Process.Start("update.exe");
+            if (File.Exists("update.exe"))
+            {
+                System.Diagnostics.Process.Start("update.exe");
+            }
 
             int count = 0;
             while (true)
             {
                 // Run every minute
-                if (_currSpotlightPath != FindImage.FindCurrentImage()) UpdateDesktop();
+                if (_currSpotlightPath != FindImage.FindCurrentImage())
+                {
+                    UpdateDesktop();
+                }
 
                 // Run every hour
-                if (count%60 == 0 && File.Exists("update.exe"))
+                if (count % 60 == 0 && File.Exists("update.exe"))
                 {
                     System.Diagnostics.Process.Start("update.exe");
                 }

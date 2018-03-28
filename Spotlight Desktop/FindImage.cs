@@ -32,7 +32,11 @@ namespace Spotlight_Desktop
                         if (phase2KeyValue.Name == "landscapeImage")
                         {
                             // Check to make sure it belongs to this account
-                            if (phase2KeyValue.Value.StartsWith(UserLocalAppData)) return phase2KeyValue.Value;
+                            if (phase2KeyValue.Value.StartsWith(UserLocalAppData))
+                            {
+                                return phase2KeyValue.Value;
+                            }
+
                             break;
                         }
                     }
@@ -43,14 +47,22 @@ namespace Spotlight_Desktop
             // (Used for an older Windows 10 update where [Phase 2] didn't exsist)
             // (This does not go into [Phase 2])
             foreach (var currentPhase1Key in creative.SubKeys)
-            // We have a [Phase 2] SubKey, now find the "landscapeImage" in the KeyValues
-            foreach (var phase2KeyValue in currentPhase1Key.SubKeyObj.KeyValues)
-                if (phase2KeyValue.Name == "LandscapeAssetPath")
+            {
+                // We have a [Phase 2] SubKey, now find the "landscapeImage" in the KeyValues
+                foreach (var phase2KeyValue in currentPhase1Key.SubKeyObj.KeyValues)
                 {
-                    // Check to make sure it belongs to this account
-                    if (phase2KeyValue.Value.StartsWith(UserLocalAppData)) return phase2KeyValue.Value;
-                    break;
+                    if (phase2KeyValue.Name == "LandscapeAssetPath")
+                    {
+                        // Check to make sure it belongs to this account
+                        if (phase2KeyValue.Value.StartsWith(UserLocalAppData))
+                        {
+                            return phase2KeyValue.Value;
+                        }
+
+                        break;
+                    }
                 }
+            }
 
             // Should occur if on an old Windows Update
             var oldCreative = new RegLookupParse(OldCreativePath, false);
@@ -58,6 +70,7 @@ namespace Spotlight_Desktop
             if (!oldCreative.Error)
             {
                 foreach (var keyName in oldCreative.KeyValues)
+                {
                     if (keyName.Name == "LandscapeAssetPath")
                     {
                         if (keyName.Value.StartsWith(UserLocalAppData))
@@ -65,6 +78,7 @@ namespace Spotlight_Desktop
                             return keyName.Value;
                         }
                     }
+                }
             }
 
             return null;
