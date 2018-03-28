@@ -1,0 +1,7 @@
+version: 2.0.0.{build}
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+build:
+  project: Spotlight Desktop.sln
+  verbosity: normal
