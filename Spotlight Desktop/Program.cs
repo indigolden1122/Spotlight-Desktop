@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 
 namespace Spotlight_Desktop
@@ -8,9 +10,17 @@ namespace Spotlight_Desktop
     {
         private static string _currSpotlightPath;
 
+
         private static void ChangeWallpaper(string pathToImage)
         {
             // This should do that^
+        }
+
+        private static void UpdateDesktop()
+        {
+            _currSpotlightPath = FindImage.FindCurrentImage();
+            Console.WriteLine("The current Spotlight Lock Screen image is located at:\n" + _currSpotlightPath + "\n");
+            ChangeWallpaper(_currSpotlightPath);
         }
 
         // Show output only if in a command prompt
@@ -22,9 +32,14 @@ namespace Spotlight_Desktop
             AttachConsole(-1);
             _currSpotlightPath = FindImage.FindCurrentImage();
 
-            Console.WriteLine("The current Spotlight Lock Screen image is located at:\n" + _currSpotlightPath);
+            while (true)
+            {
+                // Run every minute
+                if (_currSpotlightPath != FindImage.FindCurrentImage()) UpdateDesktop();
 
-            ChangeWallpaper(_currSpotlightPath);
+                // Check every minute
+                Thread.Sleep(60 * 1000);
+            }
         }
     }
 }
