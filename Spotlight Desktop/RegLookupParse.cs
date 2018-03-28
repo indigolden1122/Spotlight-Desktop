@@ -30,7 +30,7 @@ namespace Spotlight_Desktop
             localKey = localKey.OpenSubKey(keyPath, false);
 
             // Check for empty (non-exsistent) key
-            if (localKey != null)
+            if (localKey == null)
             {
                 Error = true;
                 return;
