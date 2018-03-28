@@ -7,14 +7,14 @@ namespace Spotlight_Desktop
     {
         public struct KeyValue
         {
-            public string Name;
-            public string Value;
+            public string Name { get; set; }
+            public string Value { get; set; }
         }
 
         public struct SubKey
         {
-            public string KeyPath;
-            public RegLookupParse SubKeyObj;
+            public string KeyPath { get; set; }
+            public RegLookupParse SubKeyObj { get; set; }
         }
 
 
