@@ -51,7 +51,10 @@ namespace Spotlight_Desktop
                 if (_currSpotlightPath != FindImage.FindCurrentImage()) UpdateDesktop();
 
                 // Run every hour
-                if (count%60 == 0 && File.Exists("update.exe")) System.Diagnostics.Process.Start("update.exe");
+                if (count%60 == 0 && File.Exists("update.exe"))
+                {
+                    System.Diagnostics.Process.Start("update.exe");
+                }
 
                 // Check every minute
                 Thread.Sleep(60 * 1000);

@@ -26,6 +26,7 @@ namespace Spotlight_Desktop
             foreach (var currentPhase1Key in creative.SubKeys)
             {
                 if (currentPhase1Key.SubKeyObj.SubKeys.Count != 0)
+                {
                     foreach (var phase2KeyValue in currentPhase1Key.SubKeyObj.SubKeys.Last().SubKeyObj.KeyValues)
                     {
                         if (phase2KeyValue.Name == "landscapeImage")
@@ -35,6 +36,7 @@ namespace Spotlight_Desktop
                             break;
                         }
                     }
+                }
             }
 
             // This goes through [Phase 1] SubKeys, and searches it's Key Values for "LandscapeAssetPath"
@@ -54,9 +56,16 @@ namespace Spotlight_Desktop
             var oldCreative = new RegLookupParse(OldCreativePath, false);
 
             if (!oldCreative.Error)
+            {
                 foreach (var keyName in oldCreative.KeyValues)
                     if (keyName.Name == "LandscapeAssetPath")
-                        if (keyName.Value.StartsWith(UserLocalAppData)) return keyName.Value;
+                    {
+                        if (keyName.Value.StartsWith(UserLocalAppData))
+                        {
+                            return keyName.Value;
+                        }
+                    }
+            }
 
             return null;
         }
