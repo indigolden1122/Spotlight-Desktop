@@ -1,5 +1,7 @@
 # [Spotlight Desktop](https://wallpaper.onlineth.com)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/8gvvjrrjfyn7gmdn?svg=true)](https://ci.appveyor.com/project/onlineth/spotlight-desktop)
+
 *All trademarks & images are the property of their respective owners. You agree to the [license](LICENSE) when you use this software. The developers not liable for how you use this software.*
 
 [Download Now](https://github.com/onlineth/Spotlight-Desktop/releases)
