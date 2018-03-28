@@ -24,14 +24,18 @@ namespace Spotlight_Desktop
             // *Currently used on the latest Windows 10 Release*
             // This goes through [Phase 1] SubKeys, then the last [Phase 2] SubKey
             foreach (var currentPhase1Key in creative.SubKeys)
+            {
                 if (currentPhase1Key.SubKeyObj.SubKeys.Count != 0)
                     foreach (var phase2KeyValue in currentPhase1Key.SubKeyObj.SubKeys.Last().SubKeyObj.KeyValues)
+                    {
                         if (phase2KeyValue.Name == "landscapeImage")
                         {
                             // Check to make sure it belongs to this account
                             if (phase2KeyValue.Value.StartsWith(UserLocalAppData)) return phase2KeyValue.Value;
                             break;
                         }
+                    }
+            }
 
             // This goes through [Phase 1] SubKeys, and searches it's Key Values for "LandscapeAssetPath"
             // (Used for an older Windows 10 update where [Phase 2] didn't exsist)
