@@ -18,9 +18,9 @@ namespace Spotlight_Desktop
         }
 
 
-        public bool Error;
-        public List<KeyValue> KeyValues = new List<KeyValue>();
-        public List<SubKey> SubKeys = new List<SubKey>();
+        public List<KeyValue> KeyValues { get; } = new List<KeyValue>();
+        public List<SubKey> SubKeys { get; } = new List<SubKey>();
+        public bool Error { get; set; }
 
 
         // keyPath (path to key), dive (recursively go through SubKeys)
