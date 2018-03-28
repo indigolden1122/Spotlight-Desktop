@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Spotlight_Desktop
 {
-    internal class Program
+    internal static class Program
     {
         private static string _currSpotlightPath;
 
