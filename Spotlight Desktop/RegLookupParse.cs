@@ -63,7 +63,7 @@ namespace Spotlight_Desktop
             foreach (string valueName in localKey.GetValueNames())
             {
                 string valueForName = localKey.GetValue(valueName).ToString();
-                KeyValues.Add(new KeyValue() { Name = valueName, Value = valueForName });
+                KeyValues.Add(new KeyValue { Name = valueName, Value = valueForName });
             }
         }
     }
