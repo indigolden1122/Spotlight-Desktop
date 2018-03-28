@@ -1,6 +1,6 @@
 # [Spotlight Desktop](https://wallpaper.onlineth.com)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/8gvvjrrjfyn7gmdn?svg=true)](https://ci.appveyor.com/project/onlineth/spotlight-desktop)
+[![Build status](https://ci.appveyor.com/api/projects/status/8gvvjrrjfyn7gmdn?svg=true)](https://ci.appveyor.com/project/onlineth/spotlight-desktop) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1a5059f545b34c12b5532646618c524f)](https://www.codacy.com/app/online/Spotlight-Desktop?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=onlineth/Spotlight-Desktop&amp;utm_campaign=Badge_Grade)
 
 *All trademarks & images are the property of their respective owners. You agree to the [license](LICENSE) when you use this software. The developers not liable for how you use this software.*
 
