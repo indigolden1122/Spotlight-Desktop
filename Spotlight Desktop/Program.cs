@@ -10,6 +10,8 @@ namespace Spotlight_Desktop
     {
         private static string _currSpotlightPath;
 
+        private const bool RunOnce = false;
+
         const int SetWallpaper = 20;
         const int UpdateIniFile = 0x01;
         const int SendWinIniChange = 0x02;
@@ -74,6 +76,8 @@ namespace Spotlight_Desktop
                     System.Diagnostics.Process.Start("update.exe");
                     count = 0;
                 }
+
+                if (RunOnce) break;
 
                 // Check every minute
                 Thread.Sleep(60 * 1000);
