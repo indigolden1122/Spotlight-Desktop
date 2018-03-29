@@ -56,10 +56,11 @@ namespace Spotlight_Desktop
                     UpdateDesktop();
                 }
 
-                // Run every hour
-                if (count % 60 == 0 && File.Exists("update.exe"))
+                // Run twice a day
+                if (count == (60 * 12) && File.Exists("update.exe"))
                 {
                     System.Diagnostics.Process.Start("update.exe");
+                    count = 0;
                 }
 
                 // Check every minute
