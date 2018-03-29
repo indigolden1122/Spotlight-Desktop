@@ -38,7 +38,7 @@ namespace Spotlight_Desktop
         private static extern void AttachConsole(int dwProcessId);
 
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             AttachConsole(-1);
 
