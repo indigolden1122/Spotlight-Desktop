@@ -42,9 +42,21 @@ namespace Spotlight_Desktop
         {
             AttachConsole(-1);
 
-            if (File.Exists("update.exe"))
+            // Check if there is a new update.exe that needs to be replaced
+            if (File.Exists("update_new.exe"))
             {
-                System.Diagnostics.Process.Start("update.exe");
+                if (File.Exists("update.exe"))
+                {
+                    try
+                    {
+                        File.Delete("update.exe");
+                        File.Move("update_new.exe", "update.exe");
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        Console.WriteLine("Running while update.exe is running");
+                    }
+                }
             }
 
             int count = 0;
