@@ -65,8 +65,10 @@ namespace Spotlight_Desktop
             while (true)
             {
                 // Run every minute
-                if (_currSpotlightPath != FindImage.FindCurrentImage())
+                string lastestCurrentImage = FindImage.FindCurrentImage();
+                if (_currSpotlightPath != lastestCurrentImage)
                 {
+                    _currSpotlightPath = lastestCurrentImage;
                     UpdateDesktop();
                 }
 
