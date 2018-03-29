@@ -29,7 +29,6 @@ namespace Spotlight_Desktop
 
         private static void UpdateDesktop()
         {
-            _currSpotlightPath = FindImage.FindCurrentImage();
             Console.WriteLine("The current Spotlight Lock Screen image is located at:\n" + _currSpotlightPath + "\n");
             ChangeWallpaper(_currSpotlightPath);
         }
