@@ -71,7 +71,7 @@ namespace Spotlight_Desktop
                 }
 
                 // Run twice a day
-                if (count == (60 * 12) && File.Exists("update.exe"))
+                if ((count % 60 * 12) == 0 && File.Exists("update.exe"))
                 {
                     System.Diagnostics.Process.Start("update.exe");
                     count = 0;
