@@ -62,7 +62,10 @@ namespace Spotlight_Desktop
                     count = 0;
                 }
 
-                if (RunOnce) break;
+                if (RunOnce)
+                {
+                    break;
+                }
 
                 // Check every minute
                 Thread.Sleep(60 * 1000);
