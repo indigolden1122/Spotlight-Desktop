@@ -24,3 +24,5 @@ This is a simple app that will take the current Spotlight Lock Screen image and 
 ## Requirements
 
 - Windows 10 with the Windows Spotlight feature
+
+###### Created by [Thomas Hein](https://onlineth.com) and [Anthony Slas](https://antho.app)
